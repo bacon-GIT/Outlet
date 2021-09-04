@@ -1,0 +1,33 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload</title>
+    <script type="text/javascript" src="{% static '/upload/js/upload.js' %}"></script>
+    <script type="text/javascript" src="{% static '/upload/js/jsencrypt.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'upload/css/style.css' %}">
+</head>
+<body>
+<div class="file_upload">
+    <form method="POST" id="file_upload">
+        <b>Upload your file here:</b>
+        <br />
+        <input type="file" id="input" multiple >
+    </form>
+</div>
+<div class="message_upload">
+    <form method="POST" id="message_upload">
+        <label>Enter String:</label>
+        <input type="text" id="str" name="str">
+    </form>
+</div>
+<div class="upload_message">
+    <form method="POST" action=javascript:EncryptAndUpload(); id="password_field">
+        <label>Enter Password:</label>
+        <input type="text" id="pw" name="pw"><br><br>
+        <input type="submit" value="Submit">
+        <a id="msg"></a>
+    </form>
+</div>
+</body>
+</html>

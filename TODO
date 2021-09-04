@@ -1,0 +1,12 @@
+TODO:
+    2. Bash script using said password that should:
+        -Decrypt the password file using a hashed version of the password submitted as the password
+        -Place the constructed password file within the folder
+        -Re-encrypt the folder
+    3. Same but with files
+    4. HTTPS
+
+
+TODO LATER:
+    - Fix hardcoding the public key (im fuckin lazy)
+

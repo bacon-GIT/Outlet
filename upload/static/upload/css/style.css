@@ -1,0 +1,13 @@
+.file_upload {
+    padding: 50px;
+    text-align: center;
+    float: left;
+}
+.message_upload {
+    padding: 50px;
+    text-align: center;
+    float: right;
+}
+.upload_message{
+    text-align: center;
+}
