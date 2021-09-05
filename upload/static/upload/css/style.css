@@ -6,6 +6,12 @@
 html {
     font-family: OpenSans-Light;
 }
+body {
+    background-color: #f1f1f1;
+}
+h1 {
+    padding: 10px;
+}
 .message_upload {
     width: 35%;
     padding: 50px;
@@ -17,4 +23,28 @@ html {
     padding: 50px;
     text-align: center;
     float: right;
+}
+.footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #d73027;
+    color: white;
+    text-align: center;
+}
+.glow {
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #d73027, 0 0 40px #d73027, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #d73027, 0 0 40px #d73027, 0 0 50px #d73027, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
 }

@@ -1,6 +1,6 @@
 function EncryptAndUpload() {
     // Encrypt password and any other fields that aren't empty
-    var public_key = "-----BEGIN PUBLIC KEY-----\n" +
+    let public_key = "-----BEGIN PUBLIC KEY-----\n" +
         "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC/+nzgNK/KbuU7vN+pJzMLLjbZ\n" +
         "stVQoVrWpEzganl5Gy+g/DHybECZxtsZBF+idqS5wkTcSs5+xWeCjweSRwIZiIhS\n" +
         "dufrN8PcNJTxfzR0nWg46BfHUA1ZE/dr91mTQRH5kudKH0wFv1Wn0Q+iYyshkscm\n" +
@@ -36,13 +36,23 @@ function UploadText(string, password) {
                 'X-CSRFToken': csrftoken
             },
             body: JSON.stringify(formdata)
-        });
+        }).then(function(response) {
+            if (response.status.toString() === '401') {
+                if (PCLOADLETTER()) {
+                    document.getElementById("msg").textContent = '<h1>PC LOAD LETTER</h1>';
+                } else {
+                    document.getElementById("msg").textContent = 'Incorrect Password!';
+                }
+            } else if (!response.ok) {
+                document.getElementById("msg").textContent = 'Something went wrong!';
+            }
+        })
 }
 
 function checkform(form) {
     // Return False is form is empty
-    var inputs = form.getElementsByTagName('input');
-    for (var i = 0; i < inputs.length; i++) {
+    let inputs = form.getElementsByTagName('input');
+    for (let i = 0; i < inputs.length; i++) {
         if(inputs[i].value === ""){
             return false;
         }
@@ -51,7 +61,14 @@ function checkform(form) {
 }
 
 function getCookie(name) {
-    var re = new RegExp(name + "=([^;]+)");
-    var value = re.exec(document.cookie);
+    let re = new RegExp(name + "=([^;]+)");
+    let value = re.exec(document.cookie);
     return (value != null) ? unescape(value[1]) : null;
 }
+
+function PCLOADLETTER() {
+  let FN = Math.random() * (10000);
+  let SN = Math.random() * (10000);
+  return FN === SN;
+}
+

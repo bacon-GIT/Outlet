@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '^$-jp1i#_5fi)ai=m672x7xfl6d*$6f&ah25*-9u(_qj28&cx2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -118,16 +118,15 @@ USE_L10N = True
 
 USE_TZ = True
 
-CORS_ORIGIN_ALLOW_ALL=True
+CORS_ORIGIN_ALLOW_ALL = True
 
-DJANGO_SETTINGS_MODULE='settings.py'
-
-DEBUG=True
+DJANGO_SETTINGS_MODULE = 'settings.py'
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = ( os.path.join('static'), )
+STATICFILES_DIRS = (os.path.join('static'), )
 
+STATIC_URL = '/static/'
+STATIC_ROOT = '/Users/shibboleth/PycharmProjects/Outlet/upload/static'
