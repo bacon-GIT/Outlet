@@ -1,8 +1,4 @@
 from django.shortcuts import render
-from django.template import loader
-from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_protect
-from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from Crypto.PublicKey import RSA
@@ -10,7 +6,6 @@ from Crypto.Cipher import PKCS1_v1_5
 import base64
 import random
 import json
-import time
 import os
 
 # Logging config
@@ -44,14 +39,14 @@ def uploadPassword(request):
             # Init decryptor
             decryptor = PKCS1_v1_5.new(private_key)
 
-            # Close filestreams
+            # Close filestream
             f.close()
 
             for k, v in data.items():
                 v = base64.b64decode(v)
                 if decryptor.decrypt(v, random.randint(0, 256)).decode() == password:
-                    cred = decryptor.decrypt(data['string'], random.randint(0, 256)).decode()
-                    pw = decryptor.decrypt(data['password'], random.randint(0, 256)).decode()
+                    cred = decryptor.decrypt(base64.b64decode(data['string']), random.randint(0, 256)).decode()
+                    pw = decryptor.decrypt(base64.b64decode(data['password']), random.randint(0, 256)).decode()
                     logging.info("Successfully logged in, decrypting local ground folder.")
                     error = 0
                     error += os.system(f'/bin/bash /Users/shibboleth/PycharmProjects/Outlet/filehandle.sh {cred} {pw}')
