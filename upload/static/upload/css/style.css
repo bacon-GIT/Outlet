@@ -1,13 +1,20 @@
-.file_upload {
-    padding: 50px;
-    text-align: center;
-    float: left;
+@font-face {
+  font-family: 'OpenSans-Light';
+  src: url('../fonts/OpenSans-Light.ttf') format("truetype");
+}
+
+html {
+    font-family: OpenSans-Light;
 }
 .message_upload {
+    width: 35%;
+    padding: 50px;
+    text-align: center;
+    float: left
+}
+.upload_message{
+    width: 35%;
     padding: 50px;
     text-align: center;
     float: right;
-}
-.upload_message{
-    text-align: center;
 }

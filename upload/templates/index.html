@@ -9,23 +9,19 @@
     <link rel="stylesheet" type="text/css" href="{% static 'upload/css/style.css' %}">
 </head>
 <body>
-<div class="file_upload">
-    <form method="POST" id="file_upload">
-        <b>Upload your file here:</b>
-        <br /><hr />
-        <input type="file" id="input" multiple >
-    </form>
-</div>
+<h1 style="text-align: center">The Un-Fucking Believably Safe Credential Sharing Prototype</h1>
+<h3 style="text-align: center">AKA, Outlet</h3>
 <div class="message_upload">
     <form method="POST" id="message_upload">
         <label>Enter Credentials to send:</label>
         <br /><hr />
-        <input type="text" id="str" name="str">
+        <textarea type="text" id="str" name="str" rows="20" cols="50"></textarea>
     </form>
 </div>
 <div class="upload_message">
     <form method="POST" action=javascript:EncryptAndUpload(); id="password_field">
         <label>Enter Password:</label>
+        <br /><hr />
         <input type="text" id="pw" name="pw"><br><br>
         <input type="submit" value="Submit">
         <a id="msg"></a>

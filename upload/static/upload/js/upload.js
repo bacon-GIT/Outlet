@@ -7,10 +7,9 @@ function EncryptAndUpload() {
         "pPIusumm+ouHdpTmowIDAQAB\n" +
         "-----END PUBLIC KEY-----";
 
-    var encrypt = new JSEncrypt();
+    let encrypt = new JSEncrypt();
     encrypt.setPublicKey(public_key);
-    var password = encrypt.encrypt(document.getElementById('pw').value);
-    console.log("Encrypted:", password);
+    let password = encrypt.encrypt(document.getElementById('pw').value);
 
     if (checkform(document.getElementById('password_field'))) {
 
@@ -19,21 +18,12 @@ function EncryptAndUpload() {
             let string = encrypt.encrypt(document.getElementById('str').value);
             UploadText(string, password);
     }
-        if (checkform(document.getElementById('file_upload'))) {
-            console.write("SNA");
-            //UploadFile();
-    }
         } else {
             document.getElementById("msg").innerHTML = 'You must provide a password.';
     }
 }
 
-function UploadFile() {
-    // I think I should turn the file into a filestream, encrypt that and send it like a string
-    let cred_file = document.getElementById("input").files[0];
-}
-
-function UploadText(string, password) {
+function UploadText(string) {
     let csrftoken = getCookie("csrftoken");
     let formdata = {"string": string,
                     "password": string};
