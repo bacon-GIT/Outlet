@@ -17,7 +17,7 @@ logging.basicConfig(level=logging.INFO,
                     datefmt='%Y-%m-%d %H:%M:%S')
 
 # GLOBALS
-password = 'test'
+password = '123'
 
 
 def index(request):
@@ -43,17 +43,19 @@ def uploadPassword(request):
             f.close()
 
             for k, v in data.items():
-                v = base64.b64decode(v)
-                if decryptor.decrypt(v, random.randint(0, 256)).decode() == password:
-                    cred = decryptor.decrypt(base64.b64decode(data['string']), random.randint(0, 256)).decode()
-                    pw = decryptor.decrypt(base64.b64decode(data['password']), random.randint(0, 256)).decode()
-                    logging.info("Successfully logged in, decrypting local ground folder.")
-                    error = 0
-                    error += os.system(f'/bin/bash /Users/shibboleth/PycharmProjects/Outlet/filehandle.sh {cred} {pw}')
-                    if error > 0:
-                        logging.error("Something went wrong during the encryption stage.")
-                    return Response("Fuck yeah dude", 200)
+                if k == 'password':
+                    if decryptor.decrypt(base64.b64decode(v), random.randint(0, 256)).decode().rstrip() == password:
+                        cred = decryptor.decrypt(base64.b64decode(data['string']), random.randint(0, 256)).decode()
+                        pw = decryptor.decrypt(base64.b64decode(data['password']), random.randint(0, 256)).decode()
+                        logging.info("Successfully logged in, decrypting local ground folder.")
+                        error = 0
+                        error += os.system(f'/bin/bash /Users/shibboleth/PycharmProjects/Outlet/filehandle.sh {cred} {pw}')
+                        if error > 0:
+                            logging.error("Something went wrong during the encryption stage.")
+                        return Response("Success", 200)
+                    else:
+                        return Response("Wrong Password", 401)
 
         except Exception as x:
-            logging.error("An exception occurred: ", x)
+            logging.error(f"An exception occurred: {x}")
             return Response("PC LOAD LETTER", 400)

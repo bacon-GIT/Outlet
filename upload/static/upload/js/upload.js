@@ -23,14 +23,13 @@ function EncryptAndUpload() {
     }
 }
 
-function UploadText(string) {
+function UploadText(string, password) {
     let csrftoken = getCookie("csrftoken");
     let formdata = {"string": string,
-                    "password": string};
+                    "password": password};
     console.log(formdata);
 
-    (async () => {
-        const rawResponse = await fetch('http://localhost:8000/upload/', {
+    fetch('http://localhost:8000/upload/', {
             method: 'POST',
             headers: {
                 'Content-Type': "application/x-www-form-urlencoded",
@@ -38,7 +37,6 @@ function UploadText(string) {
             },
             body: JSON.stringify(formdata)
         });
-    })();
 }
 
 function checkform(form) {
