@@ -5,7 +5,6 @@ import Outlet.settings
 
 from . import views
 
-
 urlpatterns = [
     path('', views.index, name='index'),
     path('upload/', upload.views.uploadPassword),
