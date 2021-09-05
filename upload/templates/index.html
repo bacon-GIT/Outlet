@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Upload</title>
     <script type="text/javascript" src="{% static '/upload/js/upload.js' %}"></script>
+    <!--Using a .min version of JSEncrypt-->
     <script type="text/javascript" src="{% static '/upload/js/jsencrypt.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'upload/css/style.css' %}">
 </head>
@@ -11,13 +12,14 @@
 <div class="file_upload">
     <form method="POST" id="file_upload">
         <b>Upload your file here:</b>
-        <br />
+        <br /><hr />
         <input type="file" id="input" multiple >
     </form>
 </div>
 <div class="message_upload">
     <form method="POST" id="message_upload">
-        <label>Enter String:</label>
+        <label>Enter Credentials to send:</label>
+        <br /><hr />
         <input type="text" id="str" name="str">
     </form>
 </div>

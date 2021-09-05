@@ -1,17 +1,15 @@
 function EncryptAndUpload() {
-
     // Encrypt password and any other fields that aren't empty
     var public_key = "-----BEGIN PUBLIC KEY-----\n" +
         "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC/+nzgNK/KbuU7vN+pJzMLLjbZ\n" +
         "stVQoVrWpEzganl5Gy+g/DHybECZxtsZBF+idqS5wkTcSs5+xWeCjweSRwIZiIhS\n" +
         "dufrN8PcNJTxfzR0nWg46BfHUA1ZE/dr91mTQRH5kudKH0wFv1Wn0Q+iYyshkscm\n" +
         "pPIusumm+ouHdpTmowIDAQAB\n" +
-        "-----END PUBLIC KEY-----"
+        "-----END PUBLIC KEY-----";
 
-    var password = document.getElementById('pw').value;
     var encrypt = new JSEncrypt();
     encrypt.setPublicKey(public_key);
-    var password = encrypt.encrypt(password);
+    var password = encrypt.encrypt(document.getElementById('pw').value);
     console.log("Encrypted:", password);
 
     if (checkform(document.getElementById('password_field'))) {
@@ -33,20 +31,26 @@ function EncryptAndUpload() {
 function UploadFile() {
     // I think I should turn the file into a filestream, encrypt that and send it like a string
     let cred_file = document.getElementById("input").files[0];
-    document.write(cred_file);
-    let formData = new FormData();
-    formData.append("file", cred_file);
-
-
 }
 
 function UploadText(string, password) {
-    var request = new XMLHttpRequest();
-    let formdata = new FormData();
-    formdata.append("string", string);
-    formdata.append("password", password);
-    request.open("POST", "http://127.0.0.1:5000/string");
-    request.send(formdata);
+    let csrftoken = getCookie("csrftoken");
+    let formdata = {"string": string,
+                    "password": string};
+    console.log(formdata);
+
+    (async () => {
+        const rawResponse = await fetch('http://localhost:8000/upload/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': "application/x-www-form-urlencoded",
+                'X-CSRFToken': csrftoken
+            },
+            body: JSON.stringify(formdata)
+        });
+        const content = await rawResponse.json();
+        console.log(content);
+    })();
 }
 
 function checkform(form) {
@@ -58,4 +62,10 @@ function checkform(form) {
         }
     }
     return true;
+}
+
+function getCookie(name) {
+    var re = new RegExp(name + "=([^;]+)");
+    var value = re.exec(document.cookie);
+    return (value != null) ? unescape(value[1]) : null;
 }
