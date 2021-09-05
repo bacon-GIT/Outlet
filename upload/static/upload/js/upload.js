@@ -29,7 +29,7 @@ function UploadText(string, password) {
                     "password": password};
     console.log(formdata);
 
-    fetch('http://localhost:8000/upload/', {
+    fetch('http://' + location.host.split(":")[0] + ':8000/upload/', {
             method: 'POST',
             headers: {
                 'Content-Type': "application/x-www-form-urlencoded",
@@ -45,6 +45,8 @@ function UploadText(string, password) {
                 }
             } else if (!response.ok) {
                 document.getElementById("msg").textContent = 'Something went wrong!';
+            } else {
+                document.getElementById("msg").textContent = 'Success!!';
             }
         })
 }
