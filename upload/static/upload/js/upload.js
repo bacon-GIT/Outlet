@@ -42,7 +42,7 @@ function UploadText(string, password) {
                     document.getElementById("msg").textContent = '<h1>PC LOAD LETTER</h1>';
                 } else {
                     document.getElementById("msg").textContent = 'Incorrect Password!';
-                }
+                }dock
             } else if (!response.ok) {
                 document.getElementById("msg").textContent = 'Something went wrong!';
             } else {
