@@ -49,7 +49,7 @@ def uploadPassword(request):
                         pw = decryptor.decrypt(base64.b64decode(data['password']), random.randint(0, 256)).decode()
                         logging.info("Successfully logged in, decrypting local ground folder.")
                         error = 0
-                        error += os.system(f'/bin/bash /Users/shibboleth/PycharmProjects/Outlet/filehandle.sh {cred} {pw}')
+                        error += os.system(f'/bin/bash /Users/shibboleth/PycharmProjects/Outlet/filehandle.sh -m auto -c "{cred}" -p "{pw}"')
                         if error > 0:
                             logging.error("Something went wrong during the encryption stage.")
                         return Response("Success", 200)
