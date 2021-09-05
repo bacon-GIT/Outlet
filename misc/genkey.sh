@@ -1,2 +1,2 @@
-openssl genrsa -out rsa_1024_priv.pem 1024
-openssl rsa -pubout -in rsa_1024_priv.pem -out rsa_1024_pub.pem
+openssl ecparam -name secp256k1 -genkey -out privateKey.pem
+openssl ec -in privateKey.pem -pubout -out publicKey.pem
