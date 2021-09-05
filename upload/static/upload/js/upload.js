@@ -38,8 +38,6 @@ function UploadText(string) {
             },
             body: JSON.stringify(formdata)
         });
-        const content = await rawResponse.json();
-        console.log(content);
     })();
 }
 
