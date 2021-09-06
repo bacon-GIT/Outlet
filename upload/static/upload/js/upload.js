@@ -1,21 +1,30 @@
 function EncryptAndUpload() {
     // Encrypt password and any other fields that aren't empty
-    let public_key = "-----BEGIN PUBLIC KEY-----\n" +
+    let publicKey = forge.pki.publicKeyFromPem(  "-----BEGIN PUBLIC KEY-----\n" +
         "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC/+nzgNK/KbuU7vN+pJzMLLjbZ\n" +
         "stVQoVrWpEzganl5Gy+g/DHybECZxtsZBF+idqS5wkTcSs5+xWeCjweSRwIZiIhS\n" +
         "dufrN8PcNJTxfzR0nWg46BfHUA1ZE/dr91mTQRH5kudKH0wFv1Wn0Q+iYyshkscm\n" +
         "pPIusumm+ouHdpTmowIDAQAB\n" +
-        "-----END PUBLIC KEY-----";
+        "-----END PUBLIC KEY-----");
 
-    let encrypt = new JSEncrypt();
-    encrypt.setPublicKey(public_key);
-    let password = encrypt.encrypt(document.getElementById('pw').value);
+    // let encrypt = new JSEncrypt();
+    // encrypt.setPublicKey(publickey);
+    let encrypted_password = publicKey.encrypt(document.getElementById('pw').value, "RSA-OAEP", {
+            md: forge.md.sha256.create(),
+            mgf1: forge.mgf1.create()
+    });let password = forge.util.encode64(encrypted_password);
+
+    let encrypted_string = publicKey.encrypt(document.getElementById('str').value, "RSA-OAEP", {
+            md: forge.md.sha256.create(),
+            mgf1: forge.mgf1.create()
+    });let string = forge.util.encode64(encrypted_string);
+
+    // encrypt.encrypt(document.getElementById('pw').value, true);
 
     if (checkform(document.getElementById('password_field'))) {
 
         if (checkform(document.getElementById('message_upload'))) {
             console.log("Uploading Message.")
-            let string = encrypt.encrypt(document.getElementById('str').value);
             UploadText(string, password);
     }
         } else {

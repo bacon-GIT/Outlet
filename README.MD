@@ -27,9 +27,14 @@ _/bin/bash filehandle.sh -m man -p <password>_
 
 ---
 #### TO ADD
-*   Move to the PKCS#1 OAEP RSA standard
+*   ~~Move to the PKCS#1 OAEP RSA standard~~
+*   XSS Testing
+*   Move to AWS and add HTTPS
 *   Atomic clocks
 *   Fingerprint / Eyescanner
 
 ---
 ### Appendix
+_https://www.openssl.org/docs/manmaster/man3/RSA_public_encrypt.html_
+
+_https://crypto.stackexchange.com/questions/12688/can-you-explain-bleichenbachers-cca-attack-on-pkcs1-v1-5_
