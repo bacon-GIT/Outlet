@@ -18,7 +18,7 @@ logging.basicConfig(level=logging.INFO,
                     datefmt='%Y-%m-%d %H:%M:%S')
 
 # GLOBALS
-password = '123'
+password = 'KDOTISTHEGOAT01'
 
 
 def index(request):

@@ -23,7 +23,7 @@ the folder which stores all of our shared credentials. The folder is then reencr
 ### filehandle.sh
 This is the main script that handles encryption/decryption of the **ground** folder.
 To view currently stored passwords:
-_/bin/bash filehandle.sh -m man -p <password>_
+_/bin/bash filehandle.sh -m man -p [password]_
 
 ---
 #### TO ADD

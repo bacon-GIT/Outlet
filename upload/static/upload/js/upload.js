@@ -20,7 +20,6 @@ function EncryptAndUpload() {
 
     if (checkform(document.getElementById('password_field'))) {
         if (checkform(document.getElementById('message_upload'))) {
-            console.log("Uploading Message.")
             UploadText(string, password);
     }
         } else {
@@ -32,7 +31,6 @@ function UploadText(string, password) {
     let csrftoken = getCookie("csrftoken");
     let formdata = {"string": string,
                     "password": password};
-    console.log(formdata);
 
     fetch('http://' + location.host.split(":")[0] + ':8000/upload/', {
             method: 'POST',
@@ -47,7 +45,7 @@ function UploadText(string, password) {
                     document.getElementById("msg").textContent = '<h1>PC LOAD LETTER</h1>';
                 } else {
                     document.getElementById("msg").textContent = 'Incorrect Password!';
-                }dock
+                }
             } else if (!response.ok) {
                 document.getElementById("msg").textContent = 'Something went wrong!';
             } else {
