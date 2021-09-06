@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from django.db.models import BigAutoField
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -119,6 +121,8 @@ USE_L10N = True
 USE_TZ = True
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+# DEFAULT_AUTO_FIELD = BigAutoField
 
 DJANGO_SETTINGS_MODULE = 'settings.py'
 

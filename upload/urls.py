@@ -8,5 +8,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('upload/', upload.views.uploadPassword),
+
+    # This is how men serve static documents
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': Outlet.settings.STATIC_ROOT})
 ]
