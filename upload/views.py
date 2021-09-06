@@ -34,7 +34,7 @@ def uploadPassword(request):
             data = json.loads(body_decoded)
 
             # Read .key files into memory
-            f = open('/Users/shibboleth/PycharmProjects/Outlet/misc/rsa_1024_priv.pem', 'rb')
+            f = open(f'{os.getcwd()}/keys/rsa_1024_priv.pem', 'rb')
             private_key = RSA.importKey(f.read())
 
             # Init decryptor
@@ -50,7 +50,7 @@ def uploadPassword(request):
                         pw = decryptor.decrypt(base64.b64decode(data['password'])).decode()
                         logging.info("Successfully logged in, decrypting local ground folder.")
                         error = 0
-                        error += os.system(f'/bin/bash /Users/shibboleth/PycharmProjects/Outlet/filehandle.sh -m auto -c "{cred}" -p "{pw}"')
+                        error += os.system(f'/bin/bash {os.getcwd()}/filehandle.sh -m auto -c "{cred}" -p "{pw}"')
                         if error > 0:
                             logging.error("Something went wrong during the encryption stage.")
                         return Response("Success", 200)

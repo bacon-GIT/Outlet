@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '^$-jp1i#_5fi)ai=m672x7xfl6d*$6f&ah25*-9u(_qj28&cx2'
+SECRET_KEY = 'redacted'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -133,4 +133,6 @@ DJANGO_SETTINGS_MODULE = 'settings.py'
 STATICFILES_DIRS = (os.path.join('static'), )
 
 STATIC_URL = '/static/'
+
+# Too lazy to do this dynamically, will probably have to change later
 STATIC_ROOT = '/Users/shibboleth/PycharmProjects/Outlet/upload/static'

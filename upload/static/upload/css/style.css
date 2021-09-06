@@ -24,6 +24,10 @@ h1 {
     text-align: center;
     float: right;
 }
+.textarea {
+    resize: vertical;
+    max-height: 500px;
+}
 .footer{
     position: fixed;
     left: 0;
