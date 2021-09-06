@@ -5,7 +5,7 @@ from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
 from Crypto.Hash import SHA256
 import base64
-import random
+import hashlib
 import json
 import os
 
@@ -18,7 +18,13 @@ logging.basicConfig(level=logging.INFO,
                     datefmt='%Y-%m-%d %H:%M:%S')
 
 # GLOBALS
-password = 'KDOTISTHEGOAT01'
+# This is a hashed version of the password up to the 50th character
+# to satisfy the RSA 1024 64 character ingest limit
+# Use this password to encrypt/decrypt the ground folder.
+
+# To reset this, use the following python command:
+# hashlib.sha256("YOUR_PASSWORD_STRING".encode('utf-8')).hexdigest()[:50]
+password = '0a4cab4be47b7f62fc48965b1cc898602fb78fae0a565bf92e'
 
 
 def index(request):
@@ -45,12 +51,12 @@ def uploadPassword(request):
 
             for k, v in data.items():
                 if k == 'password':
-                    if decryptor.decrypt(base64.b64decode(v)).decode().rstrip() == password:
+                    if hashlib.sha256(decryptor.decrypt(base64.b64decode(v)).rstrip()).hexdigest()[:50] == password:
                         cred = decryptor.decrypt(base64.b64decode(data['string'])).decode()
-                        pw = decryptor.decrypt(base64.b64decode(data['password'])).decode()
+                        pw = hashlib.sha256(decryptor.decrypt(base64.b64decode(data['password'])).decode().encode('utf-8')).hexdigest()
                         logging.info("Successfully logged in, decrypting local ground folder.")
                         error = 0
-                        error += os.system(f'/bin/bash {os.getcwd()}/filehandle.sh -m auto -c "{cred}" -p "{pw}"')
+                        error += os.system(f'/bin/bash {os.getcwd()}/filehandle.sh -m auto -c "{cred}" -p "{pw[:50]}"')
                         if error > 0:
                             logging.error("Something went wrong during the encryption stage.")
                         return Response("Success", 200)
