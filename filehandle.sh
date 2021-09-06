@@ -85,7 +85,7 @@ function auto() {
 }
 
 function man() {
-    # Iterate through files, return unencrypted files contents seperated by Newline
+  # Iterate through files, return unencrypted files contents seperated by Newline
   echo "$PASSWORD" | gpg --batch --yes --passphrase-fd 0 ground.tar.gz.gpg 2>/dev/null
   tar -xzvf ground.tar.gz 2>/dev/null
   rm -f ground.tar.gz

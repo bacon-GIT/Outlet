@@ -72,8 +72,6 @@ function getCookie(name) {
 }
 
 function PCLOADLETTER() {
-  let FN = Math.random() * (10000);
-  let SN = Math.random() * (10000);
-  return FN === SN;
+  return Math.random() * (10000) === Math.random() * (10000);
 }
 
