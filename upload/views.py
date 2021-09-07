@@ -23,8 +23,8 @@ logging.basicConfig(level=logging.INFO,
 # Use this password to encrypt/decrypt the ground folder.
 
 # To reset this, use the following python command:
-# hashlib.sha256("YOUR_PASSWORD_STRING".encode('utf-8')).hexdigest()[:50]
-password = '0a4cab4be47b7f62fc48965b1cc898602fb78fae0a565bf92e'
+# hashlib.sha256("YOUR_PASSWORD_STRING".encode('utf-8')).hexdigest()[:63]
+password = '0a4cab4be47b7f62fc48965b1cc898602fb78fae0a565bf92e91bee35b05292'
 
 
 def index(request):
@@ -51,12 +51,13 @@ def uploadPassword(request):
 
             for k, v in data.items():
                 if k == 'password':
-                    if hashlib.sha256(decryptor.decrypt(base64.b64decode(v)).rstrip()).hexdigest()[:50] == password:
+                    if hashlib.sha256(decryptor.decrypt(base64.b64decode(v)).rstrip()).hexdigest()[:63] == password:
                         cred = decryptor.decrypt(base64.b64decode(data['string'])).decode()
-                        pw = hashlib.sha256(decryptor.decrypt(base64.b64decode(data['password'])).decode().encode('utf-8')).hexdigest()
+                        pw = decryptor.decrypt(base64.b64decode(data['password'])).decode()
+                        print(pw)
                         logging.info("Successfully logged in, decrypting local ground folder.")
                         error = 0
-                        error += os.system(f'/bin/bash {os.getcwd()}/filehandle.sh -m auto -c "{cred}" -p "{pw[:50]}"')
+                        error += os.system(f'/bin/bash {os.getcwd()}/filehandle.sh -m auto -c "{cred}" -p "{pw}"')
                         if error > 0:
                             logging.error("Something went wrong during the encryption stage.")
                         return Response("Success", 200)

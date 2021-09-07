@@ -90,6 +90,11 @@ function man() {
   tar -xzvf ground.tar.gz 2>/dev/null
   rm -f ground.tar.gz
 
+  if [ ! -d ground/ ]; then
+    echo "Problem decrypting, probably wrong password"
+    exit 1
+  fi
+
   for FILE in ground/*;
   do
     val=$(echo "$FILE" | tr -dc '0-9')
