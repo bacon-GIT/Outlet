@@ -54,6 +54,7 @@ function UploadText(string, password) {
         })
 }
 
+// This function might be fucking useless
 function checkform(form) {
     // Return False is form is empty
     let inputs = form.getElementsByTagName('input');

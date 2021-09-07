@@ -54,7 +54,6 @@ def uploadPassword(request):
                     if hashlib.sha256(decryptor.decrypt(base64.b64decode(v)).rstrip()).hexdigest()[:63] == password:
                         cred = decryptor.decrypt(base64.b64decode(data['string'])).decode()
                         pw = decryptor.decrypt(base64.b64decode(data['password'])).decode()
-                        print(pw)
                         logging.info("Successfully logged in, decrypting local ground folder.")
                         error = 0
                         error += os.system(f'/bin/bash {os.getcwd()}/filehandle.sh -m auto -c "{cred}" -p "{pw}"')
