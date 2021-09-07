@@ -1,9 +1,8 @@
 # _Outlet_
 
-#### Requirements
-*   Django
-*   GPG
-*   CryptoDome
+#### Installation
+*   Run _keygen.sh_, copy location of those keys
+*   Copy content of public key and place it in the _publicKey_ variable in _upload.json_
 
 ---
 #### Purpose
@@ -17,10 +16,10 @@ When a user enters a credential, the credential is encrypted with the _public ke
 of the server. The user is then also prompted to enter a password, which is also encrypted
 with the _public key_. The credentials are sent to the server, where the credentials and password are
 decrypted, and the password checked. If the password matches, it's used to decrypt the **ground** folder,
-the folder which stores all of our shared credentials. The folder is then reencrypted using the same password.
+the folder which stores all of our shared credentials. The folder is then re-encrypted using the same password.
 
 ---
-### filehandle.sh
+#### filehandle.sh
 This is the main script that handles encryption/decryption of the **ground** folder.
 To view currently stored passwords:
 _/bin/bash filehandle.sh -m man -p [password]_
@@ -34,7 +33,7 @@ _/bin/bash filehandle.sh -m man -p [password]_
 *   Fingerprint / Eyescanner
 
 ---
-### Appendix
+#### Appendix
 _https://www.openssl.org/docs/manmaster/man3/RSA_public_encrypt.html_
 
 _https://crypto.stackexchange.com/questions/12688/can-you-explain-bleichenbachers-cca-attack-on-pkcs1-v1-5_
